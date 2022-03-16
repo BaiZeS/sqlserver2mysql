@@ -1,4 +1,1 @@
-# sqlserver2mysql
-Synchronize data fom sqlserver to mysql
-
-use sqlserver and mysql, synchronize every 5 min.
+synco data from sqlserver to mysql by python running in background fo windows.
