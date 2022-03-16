@@ -1,0 +1,54 @@
+# 创建水位数据新表
+CREATE TABLE `waterhisdata_new` (
+  `NewID` int(11) DEFAULT NULL,
+  `DeviceLocation` varchar(64) NOT NULL,
+  `WaterHisDataID` varchar(64) NOT NULL,
+  `DeviceID` varchar(50) NOT NULL,
+  `Water` decimal(18,3) NOT NULL,
+  `Flow` decimal(18,3) NOT NULL,
+  `CollectionTime` datetime NOT NULL,
+  `WaterFlowType` smallint(6) NOT NULL,
+  `UpdateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`WaterHisDataID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+insert into waterhisdata_new values (1,'无位置信息','d6c7b01c-7bb5-4440-8e09-511de7c63fcd','WJGL001P771',0.000,0.000,'2017-12-29 20:00:00',0,'2017-12-29 19:56:51')
+
+# 创建降雨量数据新表
+CREATE TABLE `rainfalldata_new` (
+  `NewID` int(11) DEFAULT NULL,
+  `DeviceLocation` varchar(64) NOT NULL,
+  `DeviceID` varchar(50) NOT NULL,
+  `CollectionTime` datetime NOT NULL,
+  `RainfallType` char(3) NOT NULL COMMENT '值范围: ‘1H’---1小时雨量,‘3H’---3小时雨量,‘6H’---6小时雨量,‘12H’---12小时雨量',
+  `RainfallValue` decimal(18,3) DEFAULT NULL,
+  `RainRC` int(11) DEFAULT NULL,
+  `UpDateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`DeviceID`,`CollectionTime`,`RainfallType`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='小时雨量'
+
+insert into rainfalldata_new values (1,'无位置信息','000020170332','2018-01-04 16:05:00','ADD',0.000,50,'2018-01-04 17:00:34')
+
+# 创建土壤含水率数据新表
+CREATE TABLE `specparamscollect_new` (
+  `NewID` int(11) DEFAULT NULL,
+  `DeviceLocation` varchar(64) NOT NULL,
+  `DeviceID` varchar(50) NOT NULL,
+  `CollectionTime` datetime NOT NULL,
+  `Dcm_Para1` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para2` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para3` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para4` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para5` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para6` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para7` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para8` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para9` decimal(16,2) DEFAULT NULL,
+  `Dcm_Para10` decimal(16,2) DEFAULT NULL,
+  PRIMARY KEY (`DeviceID`,`CollectionTime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='土壤含水率数据'
+
+insert into specparamscollect_new (NewID, devicelocation, deviceid, collectiontime, Dcm_Para1, Dcm_Para8) values (1, '甘洛县日坡沟2号', 'GALX000006','2021-01-01 00:00:00',0.00,11.00)
+
+
+初始化新表需要改动部分初始化条件，详见代码注释
