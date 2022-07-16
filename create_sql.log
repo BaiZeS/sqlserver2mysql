@@ -71,6 +71,15 @@ replace into waterhisdata_new VALUES ('1', '茂县三道桥沟3号', '598e7b0fa3
 replace into specparamscollect_new(NewID, DeviceLocation, DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('1', '茂县三道桥沟1号', '50002E001150565648383120', '2022-05-31 00:30:12.000', '17.30', '14.70')
 replace into specparamscollect_new(NewID, DeviceLocation, DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('1', '茂县三道桥沟2号', '6D005900135056594D373420', '2022-05-30 23:55:12.000', '.00', '17.90')
 
+# 删除错误数据
+delete from rainfalldata_new where deviceid = '6D005900135056594D373420' and CollectionTime > '2022-05-30 23:55:12.000'
+delete from rainfalldata_new where deviceid = '50002E001150565648383120' and CollectionTime > '2022-05-31 00:30:12.000'
+
+delete from waterhisdata_new where deviceid = '4D002E000C50475842303620' and CollectionTime > '2022-05-30 23:57:45.000'
+
+delete from specparamscollect_new where deviceid = '50002E001150565648383120' and CollectionTime > '2022-05-31 00:30:12.000'
+delete from specparamscollect_new where deviceid = '6D005900135056594D373420' and CollectionTime > '2022-05-30 23:55:12.000'
+
 # 查询插入的新传感器信息
 select count(1) as count_num, DeviceID from table_name where DeviceID in ('50002E001150565648383120', '6D005900135056594D373420', '4D002E000C50475842303620') group by DeviceID
 
