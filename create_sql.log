@@ -50,7 +50,10 @@ CREATE TABLE `specparamscollect_new` (
 
 insert into specparamscollect_new (NewID, devicelocation, deviceid, collectiontime, Dcm_Para1, Dcm_Para8) values (1, '甘洛县日坡沟2号', 'GALX000006','2021-01-01 00:00:00',0.00,11.00)
 
-# 插入新的传感器数据
+# 查询最早的传感器数据
+SELECT * FROM [dbo].['table_name'] where DeviceID = 'deviceid' and CollectionTime=(SELECT min(CollectionTime) from [dbo].['table_name'] where DeviceID = 'deviceid')
+
+# 插入新的传感器数据(mysql database)
 replace into rainfalldata VALUES ('6D005900135056594D373420','2022-05-30 23:55:12.000','ADD','.000','50','2022-07-12 15:45:12.000')
 replace into rainfalldata VALUES ('50002E001150565648383120', '2022-05-31 00:30:12.000', 'ADD', '.000', '50', '2022-07-12 15:45:12.000')
 
@@ -59,9 +62,17 @@ replace into waterhisdata VALUES ('598e7b0fa32d67858b252586dd8b4e7b', '4D002E000
 replace into specparamscollect(DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('50002E001150565648383120', '2022-05-31 00:30:12.000', '17.30', '14.70')
 replace into specparamscollect(DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('6D005900135056594D373420', '2022-05-30 23:55:12.000', '.00', '17.90')
 
+# 插入新的传感器数据(mysql new database)
+replace into rainfalldata_new VALUES ('1', '茂县三道桥沟2号', '6D005900135056594D373420','2022-05-30 23:55:12.000','ADD','.000','50','2022-07-12 15:45:12.000')
+replace into rainfalldata_new VALUES ('1', '茂县三道桥沟1号', '50002E001150565648383120', '2022-05-31 00:30:12.000', 'ADD', '.000', '50', '2022-07-12 15:45:12.000')
+
+replace into waterhisdata_new VALUES ('1', '茂县三道桥沟3号', '598e7b0fa32d67858b252586dd8b4e7b', '4D002E000C50475842303620', '.000', '4.330', '2022-05-30 23:57:45.000', '0', '2022-06-14 16:53:36.000')
+
+replace into specparamscollect_new(NewID, DeviceLocation, DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('1', '茂县三道桥沟1号', '50002E001150565648383120', '2022-05-31 00:30:12.000', '17.30', '14.70')
+replace into specparamscollect_new(NewID, DeviceLocation, DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('1', '茂县三道桥沟2号', '6D005900135056594D373420', '2022-05-30 23:55:12.000', '.00', '17.90')
+
 # 查询插入的新传感器信息
 select count(1) as count_num, DeviceID from table_name where DeviceID in ('50002E001150565648383120', '6D005900135056594D373420', '4D002E000C50475842303620') group by DeviceID
-
 
 # 初始化新表需要改动部分初始化条件，详见代码注释
 
