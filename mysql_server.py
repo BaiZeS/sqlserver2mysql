@@ -6,8 +6,8 @@ def connect_mysql():
     try:
         conn = pymysql.connect(
             host='localhost',  # 连接服务器mysql
-            user='root',  # 用户名
-            passwd='123456',  # 密码
+            user='wateruser',  # 用户名
+            passwd='scu@404watershow_yc!?!',  # 密码
             port=3306,  # 端口，默认为3306
             db='wjwatersystem',  # 数据库名称
             charset='utf8',  # 字符编码

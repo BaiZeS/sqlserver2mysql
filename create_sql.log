@@ -9,7 +9,7 @@ CREATE TABLE `waterhisdata_new` (
   `CollectionTime` datetime NOT NULL,
   `WaterFlowType` smallint(6) NOT NULL,
   `UpdateTime` datetime DEFAULT NULL,
-  PRIMARY KEY (`WaterHisDataID`)
+  PRIMARY KEY (`DeviceID`, `CollectionTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 insert into waterhisdata_new values (1,'无位置信息','d6c7b01c-7bb5-4440-8e09-511de7c63fcd','WJGL001P771',0.000,0.000,'2017-12-29 20:00:00',0,'2017-12-29 19:56:51')
@@ -50,5 +50,34 @@ CREATE TABLE `specparamscollect_new` (
 
 insert into specparamscollect_new (NewID, devicelocation, deviceid, collectiontime, Dcm_Para1, Dcm_Para8) values (1, '甘洛县日坡沟2号', 'GALX000006','2021-01-01 00:00:00',0.00,11.00)
 
+# 插入新的传感器数据
+replace into rainfalldata VALUES ('6D005900135056594D373420','2022-05-30 23:55:12.000','ADD','.000','50','2022-07-12 15:45:12.000')
+replace into rainfalldata VALUES ('50002E001150565648383120', '2022-05-31 00:30:12.000', 'ADD', '.000', '50', '2022-07-12 15:45:12.000')
 
-初始化新表需要改动部分初始化条件，详见代码注释
+replace into waterhisdata VALUES ('598e7b0fa32d67858b252586dd8b4e7b', '4D002E000C50475842303620', '.000', '4.330', '2022-05-30 23:57:45.000',	'0', '2022-06-14 16:53:36.000')
+
+replace into specparamscollect(DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('50002E001150565648383120', '2022-05-31 00:30:12.000', '17.30', '14.70')
+replace into specparamscollect(DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('6D005900135056594D373420', '2022-05-30 23:55:12.000', '.00', '17.90')
+
+# 查询插入的新传感器信息
+select count(1) as count_num, DeviceID from table_name where DeviceID in ('50002E001150565648383120', '6D005900135056594D373420', '4D002E000C50475842303620') group by DeviceID
+
+
+# 初始化新表需要改动部分初始化条件，详见代码注释
+
+# 创建用户信息表单
+CREATE TABLE if not exists `watersys_user` (
+  `UserId` int(11) NOT NULL AUTO_INCREMENT,
+  `UserName` varchar(64) NOT NULL,
+  `UserKey` varchar(64) NOT NULL,
+  `LoadStatus` varchar(50) NOT NULL,
+  `RegisterTime` datetime NOT NULL,
+  `LastLoadTime` datetime NOT NULL,
+	`PhoneNumber` int(11) DEFAULT NULL,
+	`EmailAddress` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`UserName`, `LoadStatus`, `LastLoadTime`),
+	KEY (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+# 插入测试用户：test_admin, test_keyword
+insert into watersys_user (UserName, UserKey, LoadStatus, RegisterTime, LastLoadTime) values ('test_admin', '320c468debbcd23e064685c972592da9', 'Y', '2022-4-26 12:00:00', '2022-4-26 12:00:00')

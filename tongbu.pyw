@@ -153,9 +153,10 @@ if __name__ == '__main__':
                 # 同步传感器数据至新表
                 synchronous_new(table_new, col_data_new, sensors_data_new)
             print(datetime_now)
-        except:
+        except Exception as e:
             with open(os.path.join(os.path.dirname(__file__), 'tongbu_sql.log'), 'a+') as f:
-                f.write('%s synchronous has not sucess, will try it 5 minutes later' % datetime_now)
+                f.write('%s synchronous has not sucess, will try it 5 minutes later \n' % datetime_now)
+                f.write('error: %s \n' % repr(e))
                 f.close()
         finally:
             time.sleep(5*60)
