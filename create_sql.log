@@ -71,6 +71,10 @@ replace into waterhisdata_new VALUES ('1', '茂县三道桥沟3号', '598e7b0fa3
 replace into specparamscollect_new(NewID, DeviceLocation, DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('1', '茂县三道桥沟1号', '50002E001150565648383120', '2022-05-31 00:30:12.000', '17.30', '14.70')
 replace into specparamscollect_new(NewID, DeviceLocation, DeviceID, CollectionTime, Dcm_Para1, Dcm_Para8) VALUES ('1', '茂县三道桥沟2号', '6D005900135056594D373420', '2022-05-30 23:55:12.000', '.00', '17.90')
 
+replace into devicestate(DeviceStateID, DeviceID, BatteryVoltage, CollectionTime, OtherState1) values('675ad3c2edf983b6a2ae49190a9a5869','SDQG000003','13.00','2022-07-21 00:00:54.000','20.00')
+replace into devicestate(DeviceStateID, DeviceID, BatteryVoltage, CollectionTime, OtherState1) values('04702d399ed67120774675cba3d2ae69','SDQG000005','12.96','2022-07-21 00:25:12.000','20.00')
+replace into devicestate(DeviceStateID, DeviceID, BatteryVoltage, CollectionTime, OtherState1) values('1760fbd30c44f7c6fc021a065f76fc25','SDQG000006','13.00','2022-07-21 00:30:12.000','20.00')
+
 # 删除错误数据
 delete from rainfalldata_new where deviceid = '6D005900135056594D373420' and CollectionTime > '2022-05-30 23:55:12.000'
 delete from rainfalldata_new where deviceid = '50002E001150565648383120' and CollectionTime > '2022-05-31 00:30:12.000'

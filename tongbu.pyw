@@ -1,4 +1,3 @@
-from logging import exception
 import os
 import time
 
@@ -126,15 +125,15 @@ def synchronous(table_name, col_data, sensor_data):
 
         close_sql(sql_conn)     # 关闭sqlserver连接
         close_mysql(mysql_conn)     # 关闭MySQL连接
-    except exception as e:
-        print('synchronous woring:', e)
+    except Exception as e:
+        print('synchronous woring:', repr(e))
 
 
 if __name__ == '__main__':
     while True:
         datetime_now = datetime.datetime.now()
         try:
-            table_name_list = ['waterhisdata', 'rainfalldata', 'specparamscollect']
+            table_name_list = ['waterhisdata', 'rainfalldata', 'specparamscollect', 'devicestate']
             for table_name in table_name_list:
                 # 获取MySQL各个传感器数据
                 col_data, sensors_data = mysql_sensor(table_name)
@@ -144,7 +143,7 @@ if __name__ == '__main__':
             table_new_list = ['waterhisdata_new', 'rainfalldata_new', 'specparamscollect_new']
             for table_new in table_new_list:
                 # 获取MySQL新表中各个传感器数据
-                # 初始化信息
+                # # 初始化信息
                 # col_data_old, sensors_data_new = mysql_sensor(table_new[0:-4])
                 # col_data_new, sensors_data_old = mysql_sensor(table_new)
                 # 同步数据至新表
@@ -155,8 +154,7 @@ if __name__ == '__main__':
             print(datetime_now)
         except Exception as e:
             with open(os.path.join(os.path.dirname(__file__), 'tongbu_sql.log'), 'a+') as f:
-                f.write('%s synchronous has not sucess, will try it 5 minutes later \n' % datetime_now)
-                f.write('error: %s \n' % repr(e))
+                f.write('%s synchronous has not sucess, will try it 5 minutes later because: %s\n' % (datetime_now, repr(e)))
                 f.close()
         finally:
             time.sleep(5*60)
