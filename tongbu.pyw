@@ -54,24 +54,6 @@ def mysql_sensor_new(table_name):
     return col_data, data_mysql
 
 
-# def sql_sensor(table_name):
-#     '''
-#     查询sqlserver表单内传感器
-#     table_name:表单名称;
-#     ->data_sql((char:DeviceID, datetime:CollectionTime),);
-#     '''
-#     sql_mysql_query = r"select DeviceID, MAX(CollectionTime) as time from " + '%s' % table_name + r" group by DeviceID order by time desc;"
-
-#     try:
-#         sql_conn = connect_sqlserver()      # 连接数据库
-#         data_sql = query_sql(sql_conn, sql_mysql_query)       # 执行查询
-#         close_mysql(sql_conn)     # 关闭数据库连接
-#         print('check sql sensor success~')
-#     except:
-#         print('check sql sensor error')
-#     return data_sql
-
-
 def synchronous_new(table_name, col_data, sensor_data):
     '''
     同步数据表单至新表
