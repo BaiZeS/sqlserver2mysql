@@ -87,6 +87,15 @@ delete from specparamscollect_new where deviceid = '6D005900135056594D373420' an
 # 查询插入的新传感器信息
 select count(1) as count_num, DeviceID from table_name where DeviceID in ('50002E001150565648383120', '6D005900135056594D373420', '4D002E000C50475842303620') group by DeviceID
 
+# 更新表结构
+alter table waterhisdata_new add abnormal int(1)
+alter table waterhisdata_new add index newID(NewID)
+show index from waterhisdata_new
+
+alter table specparamscollect_new add abnormal int(1)
+alter table specparamscollect_new add index newID(NewID)
+show index from specparamscollect_new
+
 # 初始化新表需要改动部分初始化条件，详见代码注释
 
 # 创建用户信息表单
