@@ -44,7 +44,7 @@ def execute_mysql(conn, sql, param=[]):
     try:
         cur = conn.cursor()  # 生成游标对象
         if len(param) > 0:
-            print('executemang mysql replace~')
+            print('executemany mysql replace~')
             cur.executemany(sql, param)  # 执行插入的sql语句,多条数据
         else:
             print('execute mysql insert~')
